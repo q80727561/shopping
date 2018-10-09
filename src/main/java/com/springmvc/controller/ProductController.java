@@ -17,26 +17,32 @@ import com.springmvc.model.Product;
 import com.springmvc.service.MyService;
 
 @Controller
-@RequestMapping("/category-list")
 public class ProductController {	
 	@Autowired
 	MyService service;
-
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
-
-	@GetMapping
+	@GetMapping("/category-list")
 	public String categoryList() {
 		return "main";
 	}
-	@GetMapping("/{listType}")
+	//{listType} tw en 目前先設定/tw /en 
+	@GetMapping({"/category-list/{listType}","/{listType}","/product/{id}"})
 	public String list() {
 		return "listpage";
 	}
-	@PostMapping("/{listType}")
-	public String getlist(@PathVariable String listType,HttpServletRequest httpServletRequest) {
+	@PostMapping({"/category-list/{listType}","/{listType}"})
+	public String getlist(@PathVariable("listType") String listType,HttpServletRequest httpServletRequest) {
 		ArrayList<Product> productList;
 		productList = service.InquireType(listType);
 		httpServletRequest.setAttribute("personList", productList);
-		return "list";
+		return "commit/list";
+	}
+	@PostMapping("/product/{id}")
+	public String getProductInfo(@PathVariable("id") String id,HttpServletRequest httpServletRequest) {
+		ArrayList<String> productInfo;
+		productInfo = service.Inquireid(id);
+		productInfo.add(id);
+		httpServletRequest.setAttribute("productInfo", productInfo);
+		return "commit/productInfo";
 	}
 }

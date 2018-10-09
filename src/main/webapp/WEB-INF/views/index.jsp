@@ -38,24 +38,16 @@ div.center-main {
 	position: relative;
 	top: 20px;
 }
-
-div.alert-error {
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
-	padding: 10px;
-	margin-bottom: 10px;
-	border: 1px solid transparent;
-	border-radius: 5px;
-	position: relative;
-	top: 15px;
+div.list{
+  font-size: 20px;
+  	text-align: center;
 }
 </style>
 </head>
 <body>
 	<header class="pageheader" id="pageheader"> </header>
 	<div id="center-main" class="center-main">
-		
+		<div class="list">歡迎光臨</div>
 	</div>
 </body>
 </html>

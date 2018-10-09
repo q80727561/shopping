@@ -7,4 +7,9 @@
 	http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:component-scan
+		base-package="com.springmvc.service" />
+	<context:property-placeholder
+		location="classpath:jdbc.properties" />
 </beans>
+

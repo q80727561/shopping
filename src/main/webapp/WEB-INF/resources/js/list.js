@@ -12,7 +12,6 @@ function list() {
 		alert("请升级至最新版本的浏览器");
 	}
 	if (test != null) {
-		alert(location.pathname);
 		test.open("POST", location.pathname, true);
 		test.send(null);
 		test.onreadystatechange = function() {

@@ -33,6 +33,7 @@ public class SessionListerener implements HttpSessionListener {
 		session.setMaxInactiveInterval(10 * 60);
 		User user = new User();
 		session.setAttribute("User", user);
+		
 	}
 
 	@Override

@@ -12,9 +12,8 @@
 		} else {
 			event.returnValue = false;
 		}
-		var elements = document.getElementsByClassName("btn btn-plain");		
 		var test;
-		var target = event.target || event.srcElement;  
+		var target = event.target || event.srcElement;
 		if (window.XMLHttpRequest) {
 			test = new XMLHttpRequest();
 		} else if (window.ActiveXObject) {
@@ -27,13 +26,35 @@
 			test.setRequestHeader('Accept', 'application/json')
 			test.send(null);
 			test.onreadystatechange = function() {
-				if (test.readyState == 4 && test.status == 200) {					
-					if(test.responseText=='success'){
-						 location.reload();
+				if (test.readyState == 4 && test.status == 200) {
+					if (test.responseText == 'success') {
+						location.reload();
 					}
 				}
 			}
-		};
+		}
+	}
+	function upperCase(x) {
+	//	alert(document.getElementById(x).value);
+		if (window.XMLHttpRequest) {
+			test = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			test = new window.ActiveXObject();
+		} else {
+			alert("请升级至最新版本的浏览器");
+		}
+		if (test != null) {
+			test.open("PUT", "/cart?id="+x+"&num="+document.getElementById(x).value, true);
+			test.setRequestHeader('Accept', 'application/json')
+			test.send(null);
+			test.onreadystatechange = function() {
+				if (test.readyState == 4 && test.status == 200) {
+					if (test.responseText == 'success') {
+						location.reload();
+					}
+				}
+			}
+		}
 	}
 	window.onload = function() {
 		headr();
@@ -87,9 +108,11 @@ table.cart-list>thead {
 td.cover {
 	width: 50px
 }
+
 td.name {
 	width: 368px
 }
+
 td.quantity>input {
 	width: 50px
 }
@@ -115,14 +138,17 @@ td.cover>img {
 				<tbody>
 					<c:forEach items="${order}" var="p">
 						<tr>
-							<td class="cover"><img src="/resources/img/${p.value.getProductimg()}"><br>
+							<td class="cover"><img
+								src="/resources/img/${p.value.getProductimg()}"><br>
 							</td>
-							<td class="name"><a href="/product/${p.value.getProductno()}">${p.value.getProductname()}</a>
+							<td class="name"><a
+								href="/product/${p.value.getProductno()}">${p.value.getProductname()}</a>
 							<td class="price price-item"><span>$${p.value.getProductprice()}</span></td>
-							<td class="quantity"><input type="number" value="${p.value.getProductnum()}"
-								class="update_qty"></td>
-							<td class="action"><a class="btn btn-plain"
-								onclick="show()" href="/cart?id=${p.value.getProductno()}">取消</a></td>
+							<td class="quantity"><input type="number"
+								value="${p.value.getProductnum()}" class="update_qty" id="${p.value.getProductno()}"
+								onchange="upperCase(this.id)"></td>
+							<td class="action"><a class="btn btn-plain" onclick="show()"
+								href="/cart?id=${p.value.getProductno()}">取消</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

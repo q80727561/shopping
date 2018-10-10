@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.model.Product;
@@ -73,6 +74,26 @@ public class ShoppingCartController {
 		pricetotal = pricetotal - cart.getProductnum() * cart.getProductprice();
 		session.setAttribute("pricetotal", pricetotal);
 		order.remove(id);
+		return "success";
+	}
+
+	@PutMapping
+	@ResponseBody
+	public String UpdataShoppingCart(HttpServletRequest httpServletRequest) {
+		String id = httpServletRequest.getParameter("id");
+		HttpSession session = httpServletRequest.getSession(false);
+		Map<String, ShopCart> order = (Map<String, ShopCart>) session.getAttribute("order");
+		int num = Integer.parseInt(httpServletRequest.getParameter("num"));
+		int pricetotal = (int) session.getAttribute("pricetotal");
+		ShopCart cart = order.get(id);
+		pricetotal = pricetotal - cart.getProductnum() * cart.getProductprice();
+		if (num > 0) {
+			cart.setProductnum(num);
+			pricetotal = pricetotal + cart.getProductnum() * cart.getProductprice();
+		} else {
+			order.remove(id);
+		}
+		session.setAttribute("pricetotal", pricetotal);
 		return "success";
 	}
 

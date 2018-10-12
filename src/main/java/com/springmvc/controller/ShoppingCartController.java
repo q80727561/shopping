@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.model.Product;
@@ -22,10 +23,11 @@ import com.springmvc.model.ShopCart;
 
 //WEB-INF/views/commit資料夾放置用js ajax取得的頁面
 @Controller
+@RequestMapping("/cart")
 public class ShoppingCartController {
 	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
-	@PostMapping(value = "/cart")
+	@PostMapping
 	public String addProduct(HttpServletRequest httpServletRequest) {
 		HttpSession session = httpServletRequest.getSession();
 		Map<String, ShopCart> order = (Map<String, ShopCart>) session.getAttribute("order");
@@ -63,7 +65,7 @@ public class ShoppingCartController {
 		return "redirect:/cart";
 	}
 
-	@DeleteMapping(value = "/cart")
+	@DeleteMapping
 	@ResponseBody
 	public String DeleteCart(HttpServletRequest httpServletRequest) {
 		HttpSession session = httpServletRequest.getSession(false);
@@ -97,7 +99,7 @@ public class ShoppingCartController {
 		return "success";
 	}
 
-	@GetMapping(value = "/cart")
+	@GetMapping
 	public String ShoppingCart(HttpServletRequest httpServletRequest) {
 		return "shoppingcart";
 	}

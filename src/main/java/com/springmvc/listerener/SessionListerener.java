@@ -39,10 +39,12 @@ public class SessionListerener implements HttpSessionListener {
 		HttpSession session = arg0.getSession();
 		Map<String, ShopCart> order = (Map<String, ShopCart>) session.getAttribute("order");
 		User user = (User) session.getAttribute("User");
-		ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(session.getServletContext());
-		MyService service = (MyService) ctx.getBean("MyService");
-		if (order != null) {
-			service.updataUser(user.getUsername(), order);
+		if(user.getUsername()!=null) {
+			ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(session.getServletContext());
+			MyService service = (MyService) ctx.getBean("MyService");
+			if (order != null) {
+				service.updataUser(user.getUsername(), order);
+			}
 		}
 		activeSession--;
 	}

@@ -120,6 +120,14 @@ td.quantity>input {
 td.cover>img {
 	width: 100%;
 }
+td.name>a {
+	color: #5599FF;
+	text-decoration: none;
+}
+td.action>a {
+	color: #5599FF;
+	text-decoration: none;
+}
 </style>
 </head>
 <body>

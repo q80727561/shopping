@@ -103,7 +103,7 @@ ul.right-menu>li>a:hover {
 		<div class="center-container">
 			<nav class="top-nav">
 				<ul class="main-menu">
-					<li><a href="/#">書籍分類</a>
+					<li><a href="#">書籍分類</a>
 						<ul class="category-list">
 							<li><a href="/category-list">全部分類</a></li>
 							<li><a href="/category-list/001">推理小說</a></li>
